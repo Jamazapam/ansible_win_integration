@@ -1,0 +1,8 @@
+---
+- name: setup and configure windows ad users
+  hosts: windows
+  gather_facts: true
+  vars_files:
+    - ./user_vars.yml
+  roles:
+    - {name: win_ad_user, users: "{{ user_info }}"}

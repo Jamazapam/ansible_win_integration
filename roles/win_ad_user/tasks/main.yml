@@ -1,0 +1,14 @@
+---
+# tasks file for win_ad_user
+#This role accepts a user list and creates users based on a list of values called user_info
+
+- name: Create AD Users
+  win_domain_user:
+    name: "{{ item.name }}"
+    firstname: "{{item.firstname }}"
+    surname: "{{ item.surname }}"
+    password: "{{ item.password }}"
+    email: "{{ item.email }}"
+    state: present
+  with_items:
+    - "{{ users }}"
