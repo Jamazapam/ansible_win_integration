@@ -1,0 +1,14 @@
+---
+
+#create firewall rules based on ' service_name ' variable
+- name: Setup windows firewall
+  win_firewall_rule:
+    name: "{{ item.name }}"
+    localport: "{{ item.port }}"
+    action: allow
+    direction: in
+    protocol: "{{ item.protocol }}"
+    state: present
+    enabled: yes
+  with_items:
+    - "{{ fw_rules }}"

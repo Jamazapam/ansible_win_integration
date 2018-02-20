@@ -1,0 +1,12 @@
+---
+# tasks file for win_package_installer
+
+#Install an array of packages using the win_chocolatey when the distro is server 2012 r2
+- name: Install Windows packages
+  win_chocolatey:
+    name: "{{ item.name }}"
+    params: "{{ item.params }}"
+    state: latest
+  when: ansible_distribution == "Microsoft Windows Server 2012 R2 Standard"
+  with_items:
+    - "{{ win_packages }}"

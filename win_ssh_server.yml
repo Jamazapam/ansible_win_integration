@@ -1,6 +1,10 @@
 ---
-- hosts: windows
+- name: Install and configure windows openssh and firewall
+  hosts: windows
+  gather_facts: true
   vars_files:
     - ./ssh_var.yml
   roles:
-    - win_service_config
+    - {name: win_package_installer, win_packages: [ { name: '{{ package_name }}', params: '{{ parameters }}' } ]}
+    - {name: win_service_config, win_services: [ { name: '{{ service_name }}' } ]}
+    - {name: win_firewall, fw_rules: [ { name: '{{ service_name }}', port: '{{ local_port }}', protocol: '{{ protocol_name }}' } ]}
